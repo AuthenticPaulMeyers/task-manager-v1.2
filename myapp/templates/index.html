@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Organise tasks with notifications on due time.</p>
+<button><a href="{{ url_for('auth.login') }}">Log In</a></button> <br><br>
+<button><a href="{{ url_for('auth.register') }}">Register</a></button> <br><br>
+
+{% endblock %}

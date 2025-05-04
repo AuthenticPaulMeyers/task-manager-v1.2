@@ -1,5 +1,5 @@
 # create database tables
-from datetime import datetime
+from datetime import datetime, time
 from flask_sqlalchemy import SQLAlchemy
 from . import db
 from flask_login import UserMixin
@@ -20,7 +20,8 @@ class Task(db.Model):
     title=db.Column(db.String(30), nullable=False)
     description=db.Column(db.Text, nullable=False)
     user_id=db.Column(db.Integer, db.ForeignKey("user.id"))
-    reminder_time = db.Column(db.DateTime, nullable=False)
+    reminder_time = db.Column(db.Time, nullable=False)
+    reminder_day = db.Column(db.String(20), nullable=False)
     is_completed = db.Column(db.Boolean, default=False)
     create_at=db.Column(db.DateTime, default=datetime.now())
     updated_at=db.Column(db.DateTime, onupdate=datetime.now())

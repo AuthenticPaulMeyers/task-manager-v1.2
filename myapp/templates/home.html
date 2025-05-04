@@ -2,5 +2,30 @@
 
 {% block content %}
 Welcome to task manager {{ username }}
-<button><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
+<button><a href="{{ url_for('auth.logout') }}">Log Out</a></button> <br><br>
+<button><a href="{{ url_for('task.new_task') }}">New task</a></button> <br><br>
+
+<div class="container">
+    <div class="card-container">
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="card">
+                {{ task.title }} <br>
+                {{ task.description }} <br>
+                {{ task.reminder_time }} <br>
+                {{ task.reminder_day }} <br>
+                {{ task.is_completed }} <br>
+                </div> 
+                <button><a href="{{ url_for('task.edit_task', task_id=task.id) }}">Edit</a></button>
+                <button><a href="{{ url_for('task.delete_task', task_id=task.id) }}">Delete</a></button>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>You do not have any task</p>
+        {% endif %}
+    </div>
+</div>
+
+
+
 {% endblock %}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, DateTimeField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, BooleanField, TimeField, SelectField
 from wtforms.validators import DataRequired, EqualTo, Email, Length
 
 
@@ -19,6 +19,15 @@ class LoginForm(FlaskForm):
 class TaskForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(min=4, max=30)], render_kw={"placeholder": "Project title"})
     description = TextAreaField("Description", validators=[DataRequired()], render_kw={"placeholder": "Project description"})
-    reminder_time = DateTimeField("Set reminder", validators=[DataRequired()], render_kw={"placeholder": "Set reminder time"})
-    is_completed = BooleanField("Completed", validators=[DataRequired()])
+    reminder_time = TimeField("Set reminder", validators=[DataRequired()], render_kw={"placeholder": "Set reminder time"})
+    reminder_day = SelectField('Select a Day', choices=[
+        ('Monday'),
+        ('Tuesday'),
+        ('Wednesday'),
+        ('Thursday'),
+        ('Friday'),
+        ('Saturday'),
+        ('Sunday')
+    ])
+    is_completed = BooleanField("Completed")
     submit = SubmitField('Submit task')
