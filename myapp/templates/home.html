@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Welcome to task manager {{ username }}
+<button><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
+{% endblock %}
