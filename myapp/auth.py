@@ -31,7 +31,7 @@ def register():
         db.session.commit()
         flash('Registered successfully!', category='success')
         return redirect(url_for('auth.login'))
-    return render_template('register.html', form=form, title='Register')
+    return render_template('register.html', form=form, title='Register', user=current_user)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -62,7 +62,7 @@ def get_profile():
 
     user_profile = User.query.filter_by(id=current_user.id).first()
 
-    return render_template('profile.html', title='Profile', user_profile=user_profile)
+    return render_template('profile.html', title='Profile', user_profile=user_profile, user=current_user)
 
 @auth.route('/logout')
 @login_required 

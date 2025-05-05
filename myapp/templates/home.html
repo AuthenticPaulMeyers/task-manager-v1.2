@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Welcome to task manager {{ username }}
-<button><a href="{{ url_for('auth.logout') }}">Log Out</a></button> <br><br>
+{% include 'nav.html' %}
 <button><a href="{{ url_for('task.new_task') }}">New task</a></button> <br><br>
 
 <div class="container">

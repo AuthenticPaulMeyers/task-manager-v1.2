@@ -6,10 +6,12 @@ from .models import Task
 from . import db
 task = Blueprint('task', __name__, url_prefix='/task-manager')
 
+# the root
 @task.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
 
+# display all task
 @task.route('/tasks')
 @login_required
 def home():
@@ -33,7 +35,7 @@ def home():
     
     tasks = query.order_by(Task.create_at.desc()).all()
 
-    return render_template('home.html', title='Home', username=current_user.username, tasks=tasks)
+    return render_template('home.html', title='Home', user=current_user, tasks=tasks)
 
 # add taask route
 @task.route('/new_task', methods=['GET', 'POST'])
@@ -93,6 +95,3 @@ def delete_task(task_id):
         return redirect(url_for('task.home'))
     return redirect(url_for('task.home'))
 
-
-def str_to_bool(value):
-    return str(value).strip().capitalize() in ['True','False']
