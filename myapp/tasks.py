@@ -10,23 +10,23 @@ task = Blueprint('task', __name__, url_prefix='/task-manager')
 def index():
     return render_template('index.html')
 
-@task.route('/home')
+@task.route('/tasks')
 @login_required
 def home():
 
     status_filter = request.args.get('status')
     day_filter = request.args.get('day')
 
-    query = Task.query
+    query = Task.query.filter_by(user_id=current_user.id)
 
     if status_filter == 'True':
-        query = query.filter_by(user_id=current_user.id, is_completed=True)
+        query = query.filter_by(is_completed=True)
 
     if status_filter == 'False':
-        query = query.filter_by(user_id=current_user.id, is_completed=False)
+        query = query.filter_by(is_completed=False)
 
     if day_filter:
-        query = query.filter_by(user_id=current_user.id, reminder_day=day_filter)
+        query = query.filter_by(reminder_day=day_filter)
     
     if status_filter == 'all':
         query = query.filter_by(user_id=current_user.id)
