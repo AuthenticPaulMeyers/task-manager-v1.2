@@ -10,13 +10,28 @@ task = Blueprint('task', __name__, url_prefix='/task-manager')
 def index():
     return render_template('index.html')
 
-
 @task.route('/home')
 @login_required
 def home():
 
+    status_filter = request.args.get('status')
+    day_filter = request.args.get('day')
 
-    tasks = Task.query.filter_by(user_id=current_user.id).order_by(Task.create_at.desc()).all()
+    query = Task.query
+
+    if status_filter == 'True':
+        query = query.filter_by(user_id=current_user.id, is_completed=True)
+
+    if status_filter == 'False':
+        query = query.filter_by(user_id=current_user.id, is_completed=False)
+
+    if day_filter:
+        query = query.filter_by(user_id=current_user.id, reminder_day=day_filter)
+    
+    if status_filter == 'all':
+        query = query.filter_by(user_id=current_user.id)
+    
+    tasks = query.order_by(Task.create_at.desc()).all()
 
     return render_template('home.html', title='Home', username=current_user.username, tasks=tasks)
 
@@ -65,8 +80,6 @@ def edit_task(task_id):
         return redirect(url_for('task.home'))
     return render_template('edit_task.html', form=form, title='Edit Task', task=task)
 
-    
-
 # delete task route
 @task.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
 @login_required
@@ -79,3 +92,7 @@ def delete_task(task_id):
         flash("Task deleted.", category='success')
         return redirect(url_for('task.home'))
     return redirect(url_for('task.home'))
+
+
+def str_to_bool(value):
+    return str(value).strip().capitalize() in ['True','False']

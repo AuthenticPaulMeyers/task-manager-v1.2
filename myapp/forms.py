@@ -12,7 +12,7 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder": "name@example.com"})
-    password = PasswordField("Password", validators=[DataRequired()], render_kw={"placeholder": "Create password"})
+    password = PasswordField("Password", validators=[DataRequired()], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
 
 

@@ -6,6 +6,28 @@ Welcome to task manager {{ username }}
 <button><a href="{{ url_for('task.new_task') }}">New task</a></button> <br><br>
 
 <div class="container">
+
+    <form method="GET" nonvalidate >
+        <select name="status">
+          <option value="" selected disabled>Status</option>
+          <option value="all">All</option>
+          <option value="True">Completed</option>
+          <option value="False">Pending</option>
+        </select>
+      
+        <select name="day">
+          <option value="" selected disabled>Day</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+        <button type="submit">Filter</button>
+      </form>
+      
     <div class="card-container">
         {% if tasks %}
             {% for task in tasks %}
