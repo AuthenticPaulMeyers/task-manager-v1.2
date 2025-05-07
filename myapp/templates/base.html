@@ -3,22 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Flowbite CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     {% if title %}
         <title>{{ title }} - Task Manager</title>
     {% else %}
         <title>Task Manager</title>
     {% endif %}
 </head>
-<body>
-    <h4>Tasm.</h4>
-    {% if user.is_authenticated %}
-       
-        {{ user.username.capitalize() }}
-        <button><a href="{{ url_for('auth.logout') }}">Log Out</a></button> <br><br>
-    {% else %}
-        <button><a href="{{ url_for('auth.login') }}">Log In</a></button> <br><br>
-        <button><a href="{{ url_for('auth.register') }}">Register</a></button> <br><br>
-    {% endif %}
+<body class="bg-gray-100 min-h-screen">
+    <!-- <nav class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md mt-10">
+        <h4>Tasm.</h4>
+        {% if user.is_authenticated %}
+           
+            {{ user.username.capitalize() }}
+            <button><a href="{{ url_for('auth.logout') }}">Log Out</a></button> <br><br>
+        {% else %}
+            <button><a href="{{ url_for('auth.login') }}">Log In</a></button> <br><br>
+            <button><a href="{{ url_for('auth.register') }}">Register</a></button> <br><br>
+        {% endif %}
+    </nav>
+
+     -->
+
+<nav class="bg-gray-100 shadow-md w-full">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="{{ url_for('task.home')}}" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <h1 class="self-center text-2xl text-purple-800 font-bold">Tasm.</h1>
+      </a>
+      
+      <div class="md:block md:w-auto">
+        <ul class="font-medium flex p-4 md:p-0 mt-4 md:flex-row md:space-x-8">
+        {% if user.is_authenticated %}
+        <span class="text-gray-900">{{ user.username.capitalize() }}</span>
+        <li>
+            <button><a href="{{ url_for('auth.logout') }}" class="focus:outline-none text-black focus:ring-1 focus:ring-purple-300 font-medium rounded-lg  text-purple-800 px-5 py-2.5 mb-2 border-1 border-purple-800 ">Log Out</a></button>
+        </li>
+        {% else %}
+          <li>
+            <button style="border: none; outline: none"><a href="{{ url_for('auth.login') }}" class="focus:outline-none text-black focus:ring-1 focus:ring-purple-300 font-medium rounded-lg  text-purple-800 px-5 py-2.5 mb-2 border-1 bg-gray-100 border-purple-800 ">Log In</a></button>
+          </li>
+          <li>
+            <button style="border: none; outline: none"><a href="{{ url_for('auth.register') }}" class="focus:outline-none text-white bg-purple-800 hover:bg-purple-800 focus:ring-1 focus:ring-purple-300 border-2 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Register</a></button>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+
 
     {% with messages = get_flashed_messages(with_categories=true) %} 
         {% if messages %} 
@@ -39,5 +75,7 @@
 
     {% block content %}{% endblock %}
     
+    <!-- Flowbite Js Link -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>

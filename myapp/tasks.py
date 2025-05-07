@@ -4,6 +4,8 @@ from flask_login import current_user, login_required
 from .forms import TaskForm
 from .models import Task
 from . import db
+# from myapp.taskscheduler.scheduler import send_reminder 
+
 task = Blueprint('task', __name__, url_prefix='/task-manager')
 
 # the root
@@ -54,9 +56,17 @@ def new_task():
 
         db.session.add(task)
         db.session.commit()
+
+        # # Schedule email
+        # eta = task.reminder_time  # datetime object
+        # send_reminder.apply_async(
+        #     args=[current_user.email, "Task Reminder", f"Reminder: {task.title}"],
+        #     eta=eta  # executes at exact reminder_time
+        # )
+
         flash('New task added!', category='success')
         return redirect(url_for('task.home'))
-    return render_template('add_task.html', title='Add Task', form=form)
+    return render_template('add_task.html', title='Add Task', form=form, user=current_user)
 
 # edit task route
 @task.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
@@ -78,9 +88,17 @@ def edit_task(task_id):
         task.is_completed = form.is_completed.data
         db.session.commit()
 
+        
+        # # Schedule email
+        # eta = task.reminder_time  # datetime object
+        # send_reminder.apply_async(
+        #     args=[current_user.email, "Task Reminder", f"Reminder: {task.title}"],
+        #     eta=eta  # executes at exact reminder_time
+        # )
+
         flash('Task edited.', category='success')
         return redirect(url_for('task.home'))
-    return render_template('edit_task.html', form=form, title='Edit Task', task=task)
+    return render_template('edit_task.html', form=form, title='Edit Task', task=task, user=current_user)
 
 # delete task route
 @task.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
