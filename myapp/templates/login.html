@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="mt-10">
-    <form method="post" class="max-w-sm mx-auto border-1 border-purple-500 rounded-lg p-4"> 
+    <form method="post" class="max-w-sm mx-auto border-1 border-purple-500 rounded-lg p-4 login-form"> 
         {{ form.hidden_tag()}}
         <div class="mb-5">
             {{ form.email.label(class="block mb-2 text-sm font-medium text-black") }}
@@ -19,7 +19,7 @@
             {% endfor %}
         </div>
         <div class="mb-5">
-            {{ form.submit(class="text-white bg-purple-800 hover:bg-purple-700 focus:ring-2 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer") }}
+            {{ form.submit(class="text-white login-btn bg-purple-800 hover:bg-purple-700 focus:ring-2 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer") }}
         </div>
         <div>
             <span class="text-black text-sm ">New user? <a href="{{ url_for('auth.register')}}" class="text-purple-800">Register here.</a></span>
@@ -27,4 +27,5 @@
     </form>
 
 </div>
+
 {% endblock %}

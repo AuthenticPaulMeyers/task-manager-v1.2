@@ -1,50 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <form method="post">
+<div class="mt-10">
+    <form method="post" class="max-w-sm mx-auto border-1 border-purple-500 rounded-lg p-4">
         {{ form.hidden_tag()}}
-        <div>
-            {{ form.title.label }}
-            {{ form.title() }}
+        <div class="mb-5">
+            {{ form.title.label(class="block mb-2 text-sm font-medium text-black") }}
+            {{ form.title(class="bg-gray-100 border-1 border-purple-800 text-black text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5") }}
             {% for error in form.title.errors %}
-                <span>{{ error }}</span>
+                <span class="text-sm text-red-800">{{ error }}</span>
             {% endfor %}
         </div>
-        <div>
-            {{ form.description.label }}
-            {{ form.description() }}
+        <div class="mb-5">
+            {{ form.description.label(class="block mb-2 text-sm font-medium text-black") }}
+            {{ form.description(class="bg-gray-100 border-1 border-purple-800 text-black text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5") }}
             {% for error in form.description.errors %}
-                <span>{{ error }}</span>
+                <span class="text-sm text-red-800">{{ error }}</span>
             {% endfor %}
         </div>
-        <div>
-            {{ form.reminder_time.label }}
-            {{ form.reminder_time() }}
+        <div class="mb-5">
+            {{ form.reminder_time.label(class="block mb-2 text-sm font-medium text-black") }}
+            {{ form.reminder_time(class="bg-gray-100 border-1 border-purple-800 text-black text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5") }}
             {% for error in form.reminder_time.errors %}
-                <span>{{ error }}</span>
+                <span class="text-sm text-red-800">{{ error }}</span>
             {% endfor %}
         </div>
-        <div>
-            {{ form.reminder_day.label }}
-            {{ form.reminder_day() }}
+        <div class="mb-5">
+            {{ form.reminder_day.label(class="block mb-2 text-sm font-medium text-black") }}
+            {{ form.reminder_day(class="bg-gray-100 border-1 border-purple-800 text-black text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5") }}
             {% for error in form.reminder_day.errors %}
-                <span>{{ error }}</span>
+                <span class="text-sm text-red-800">{{ error }}</span>
             {% endfor %}
         </div>
-        <div>
-            {{ form.is_completed.label }}
-            {{ form.is_completed() }}
+        <div class="mb-5">
+            {{ form.is_completed.label(class="block mb-2 text-sm font-medium text-black") }}
+            {{ form.is_completed(class="bg-gray-100 border-1 border-purple-800 text-black text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5") }}
             {% for error in form.is_completed.errors %}
-                <span>{{ error }}</span>
+                <span class="text-sm text-red-800">{{ error }}</span>
             {% endfor %}
         </div>
-        <div>
-            {{ form.submit() }}
+        <div class="flex align-center flex-col gap-4">
+            <div>
+                {{ form.submit(class="text-white bg-purple-800 hover:bg-purple-700 focus:ring-2 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer") }}
+            </div>
+            <div>
+                <span><a href="{{ url_for('task.home')}}" class="text-white bg-red-800 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">Cancel</a></span>
+            </div>
         </div>
     </form>
-    <div>
-        <span><a href="{{ url_for('task.home')}}">Cancel</a></span>
-    </div>
+
 </div>
 {% endblock %}

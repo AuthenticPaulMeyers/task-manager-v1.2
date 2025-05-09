@@ -3,9 +3,9 @@
 {% block content %}
 {% include 'nav.html' %}
 <div class="p-8">
-  <div class="flex flex-center align-center justify-between">
+  <div class="flex flex-center align-center justify-between flex-col mb-4">
     <div>
-      <button class="focus:outline-none text-white bg-purple-800 hover:bg-purple-800 focus:ring-1 focus:ring-purple-300 border-2 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><a href="{{ url_for('task.new_task') }}" >New task</a></button>
+      <button class="focus:outline-none text-white bg-purple-800 hover:bg-purple-800 focus:ring-1 focus:ring-purple-300 border-2 font-medium  rounded-lg text-sm px-5 py-2.5 mb-2"><a href="{{ url_for('task.new_task') }}" >New task</a></button>
     </div>
     <div>
       <form method="GET" nonvalidate >
@@ -30,23 +30,22 @@
       </form>
     </div>
   </div>
-  <hr >
+  <hr class="text-purple-800 border border-1">
   
-  <div class="container">
-        
-      <div class="card-container">
+  <div class="container"> 
+      <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-2 md:space-y-0">
           {% if tasks %}
               {% for task in tasks %}
-                  <div class="block mt-4 max-w-sm p-6 bg-gray-100 border border-purple-700 rounded-lg shadow-sm">
+                <div class="block mt-4 max-w-sm p-6 bg-gray-100 border border-purple-700 rounded-lg shadow-sm" style="position: relative;">
                   <div class="flex justify-end">
-                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 rounded-lg text-sm cursor-pointer" type="button">
+                    <button class="inline-block text-gray-500 rounded-lg text-sm cursor-pointer delete-menu" type="button">
                       <span class="sr-only">Open dropdown</span>
                       <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                           <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                       </svg>
                   </button>
-                  <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
-                    <ul class="py-2" aria-labelledby="dropdownButton">
+                  <div class="z-10 hidden show-delete text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44" style="position: absolute; right: 10px; top: 45px; display: none;">
+                    <ul class="py-2" >
                     <li>
                         <a href="{{ url_for('task.edit_task', task_id=task.id) }}" class="block px-2 py-2 text-sm text-gray-900 hover:bg-gray-100">Edit</a>
                     </li>
@@ -68,16 +67,18 @@
                     {% else %}
                     <span class="text-red-200 font-medium bg-red-600 py-1.5 px-2 rounded-lg">Pending</span> <br>
                     {% endif %}
-                    <!-- <button><a href="{{ url_for('task.edit_task', task_id=task.id) }}">Edit</a></button>
-                    <button><a href="{{ url_for('task.delete_task', task_id=task.id) }}">Delete</a></button> -->
                   </div> 
 
               {% endfor %}
-          {% else %}
-              <p class="text-center text-red-500 p-8">You do not have any task.</p>
-          {% endif %}
+              {% else %}
+              <p class="text-center align-center text-red-500 p-8">You do not have any task.</p>
+              {% endif %}
       </div>
   </div>
-  
+  <script>
+    window.onload = function(){
+      requestNotificationPermission()
+    }
+  </script>
 </div>
 {% endblock %}

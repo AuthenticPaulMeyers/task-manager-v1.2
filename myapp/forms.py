@@ -17,8 +17,8 @@ class LoginForm(FlaskForm):
 
 
 class TaskForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired(), Length(min=4, max=30)], render_kw={"placeholder": "Project title"})
-    description = TextAreaField("Description", validators=[DataRequired()], render_kw={"placeholder": "Project description"})
+    title = StringField("Title", validators=[DataRequired(), Length(min=4, max=30)], render_kw={"placeholder": "Task title"})
+    description = TextAreaField("Description", validators=[DataRequired()], render_kw={"placeholder": "Task description"})
     reminder_time = TimeField("Set reminder", validators=[DataRequired()], render_kw={"placeholder": "Set reminder time"})
     reminder_day = SelectField('Select a Day', choices=[
         ('Monday'),

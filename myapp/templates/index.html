@@ -2,7 +2,10 @@
 
 {% block content %}
 {% include 'nav.html' %}
-<p>Organise tasks with notifications on due time.</p>
+<div class="p-8 mb-4 flex-center flex align-center flex-col">
+    <h2 class="text-6xl text-center mt-10 font-bold mb-10">Organise <span class="text-purple-800">tasks</span> <br>with notifications in due time.</h2>
+    <button style="border: none; outline: none"><a href="{{ url_for('auth.login') }}" class="focus:outline-none text-white bg-purple-800 hover:bg-purple-800 focus:ring-1 focus:ring-purple-300 border-2 font-medium rounded-lg text-sm px-5 py-2.5">Get started</a></button>
+</div>
 
 
 {% endblock %}

@@ -46,11 +46,10 @@ def login():
 
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in.', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('task.home'))
             flash('Wrong email or password', category='error')
-        flash('Wrong email or password', category='error')
+        # flash('Wrong email or password', category='error')
         return redirect(url_for('auth.login'))
     
     return render_template('login.html', form=form, title='Login', user=current_user)
