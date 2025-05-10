@@ -30,13 +30,12 @@
       </form>
     </div>
   </div>
-  <hr class="text-purple-800 border border-1">
   
   <div class="container"> 
       <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-2 md:space-y-0">
           {% if tasks %}
               {% for task in tasks %}
-                <div class="block mt-4 max-w-sm p-6 bg-gray-100 border border-purple-700 rounded-lg shadow-sm" style="position: relative;">
+                <div class="block mt-4 max-w-sm p-6 bg-gray-100 border border-purple-700 rounded-lg shadow-sm" style="position: relative; height: 220px; overflow: hidden;">
                   <div class="flex justify-end">
                     <button class="inline-block text-gray-500 rounded-lg text-sm cursor-pointer delete-menu" type="button">
                       <span class="sr-only">Open dropdown</span>
@@ -44,7 +43,7 @@
                           <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                       </svg>
                   </button>
-                  <div class="z-10 hidden show-delete text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44" style="position: absolute; right: 10px; top: 45px; display: none;">
+                  <div class="z-10 hidden show-delete text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-20" style="position: absolute; right: 10px; top: 45px; display: none;">
                     <ul class="py-2" >
                     <li>
                         <a href="{{ url_for('task.edit_task', task_id=task.id) }}" class="block px-2 py-2 text-sm text-gray-900 hover:bg-gray-100">Edit</a>
@@ -56,16 +55,17 @@
                 </div>
                   </div>
                     <h1 class="text-2xl font-bold tracking-tight text-purple-800">{{ task.title }}</h1>
-                    <p class="font-normal text-gray-900">{{ task.description }}</p>
-                    <div class="mt-2 mb-8">
+                    <div style="height: 30%; overflow: hidden;">
+                      <p class="font-normal text-gray-900">{{ task.description }}</p>
+                    </div>
+                    <div class="mt-4 mb-4">
                       <span class="bg-purple-400 text-purple-800 text-sm font-bold py-1.5 px-2 rounded-lg"> 
                         {{ task.reminder_day }} | {{ task.reminder_time }}</span>
                     </div>
-                    <hr class="border border-1 border-purple-800 mb-4">
                     {% if task.is_completed == True %}
-                    <span class="text-gray-100 font-medium bg-green-600 py-1.5 px-2 rounded-lg">Completed</span> <br>
+                    <span class="text-green-600 font-medium py-1.5 rounded-lg">Completed</span> <br>
                     {% else %}
-                    <span class="text-red-200 font-medium bg-red-600 py-1.5 px-2 rounded-lg">Pending</span> <br>
+                    <span class="text-red-600 font-medium py-1.5 rounded-lg">Pending</span> <br>
                     {% endif %}
                   </div> 
 
